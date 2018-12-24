@@ -25,7 +25,7 @@ def add_item(shoplist):
     item = None
     while item != "Stop":
         item = input("Write the name of the thing or \"Stop\" to stop making a list >>> ")
-        if item != "Stop":
+        if item != "Stop" and item != "":
             set_quantity(item, shoplist)
         elif item == "":
             print("Name of the thing can't be empty. Please try again")
@@ -104,9 +104,9 @@ def savefile(format2):
     file = open(f'{filename}.txt', 'w')
     file.write('''    Here's your list. Enjoy    
            :Example:           
-Name of item - Quantity of item''')
+Name of item - Quantity of item\n''')
     for x in range(len(format2) // 2):
-        file.write("{0} - {1}".format(format2[currindx2], format2[currindx2 + 1]))
+        file.write("{0} - {1}\n".format(format2[currindx2], format2[currindx2 + 1]))
         currindx2 += 2
     file.close()
 
@@ -114,10 +114,10 @@ Name of item - Quantity of item''')
 def restartsave():
     rs = input('''What do you want to do?
 1 - Go to menu
-2 - Exit''')
-    if rs == "1" or rs == "Go to menu":
-        start()
-    elif rs == "2" or rs == "Exit":
+2 - Exit
+>>>  ''')
+
+    if rs == "2" or rs == "Exit":
         exit(0)
     else:
         print("Answer is not right. Please try again")
