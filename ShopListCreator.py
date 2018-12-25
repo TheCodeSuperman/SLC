@@ -7,13 +7,14 @@ def start():
 1 - Create new list
 2 - Exit
 >>> ''')
-    if menu == "1" or menu == "Create new list":
-        new_list()
-    elif menu == "2" or menu == "Exit":
-        exit(0)
-    else:
-        print("The answer isn't right")
-        start()
+    while menu != "1" or menu != "Create new list" or menu != "2" or menu != "Exit":
+        if menu == "1" or menu == "Create new list":
+            new_list()
+        elif menu == "2" or menu == "Exit":
+            exit(0)
+        else:
+            print("The answer isn't right")
+            continue
 
 
 def new_list():
@@ -29,8 +30,7 @@ def add_item(shoplist):
             set_quantity(item, shoplist)
         elif item == "":
             print("Name of the thing can't be empty. Please try again")
-            add_item(shoplist)
-            break
+            continue
         elif item == "Stop":
             show_lists1(shoplist)
             break
@@ -51,7 +51,6 @@ def set_quantity(item, shoplist):
 
 def add_to_list(item, quantity, shoplist):
     shoplist[str(item)] = int(quantity)
-    add_item(shoplist)
 
 
 def show_lists1(shoplist):
@@ -109,6 +108,7 @@ Name of item - Quantity of item\n''')
         file.write("{0} - {1}\n".format(format2[currindx2], format2[currindx2 + 1]))
         currindx2 += 2
     file.close()
+    restartsave()
 
 
 def restartsave():
@@ -116,7 +116,6 @@ def restartsave():
 1 - Go to menu
 2 - Exit
 >>>  ''')
-
     if rs == "2" or rs == "Exit":
         exit(0)
     else:
