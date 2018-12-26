@@ -2,18 +2,20 @@ print('''ShopListCreator''')
 
 
 def start():
+    menu = None
     print('Hello, this program creates your shop list.')
-    menu = input('''Menu:
+    while menu != "1" or menu != "Create new list" or menu != "2" or menu != "Exit":
+        menu = input('''Menu:
 1 - Create new list
 2 - Exit
 >>> ''')
-    while menu != "1" or menu != "Create new list" or menu != "2" or menu != "Exit":
         if menu == "1" or menu == "Create new list":
             new_list()
+            break
         elif menu == "2" or menu == "Exit":
             exit(0)
         else:
-            print("The answer isn't right")
+            print("Error: The answer isn't right")
             continue
 
 
@@ -29,7 +31,7 @@ def add_item(shoplist):
         if item != "Stop" and item != "":
             set_quantity(item, shoplist)
         elif item == "":
-            print("Name of the thing can't be empty. Please try again")
+            print("Error: Name of the thing can't be empty. Please try again")
             continue
         elif item == "Stop":
             show_lists1(shoplist)
@@ -37,16 +39,14 @@ def add_item(shoplist):
 
 
 def set_quantity(item, shoplist):
-    quantity = None
-    try:
-        quantity = int(input("Write the quantity of wanted thing >>> "))
-        add_to_list(item, quantity, shoplist)
-    except ValueError:
-        if quantity != '':
+    while True:
+        try:
+            quantity = int(input("Write the quantity of wanted thing >>> "))
+            add_to_list(item, quantity, shoplist)
+            break
+        except ValueError:
             print("Error: Quantity should be number. Please, try again.")
-        else:
-            print("Error: you can't leave empty quantity, quantity should be number. Please, try again.")
-        set_quantity(item, shoplist)
+            continue
 
 
 def add_to_list(item, quantity, shoplist):
@@ -81,29 +81,35 @@ def showlists3(format2):
 
 
 def restart(format2):
-    r = input('''What do you want to do?
+    r = None
+    while r != "1" or r != "Go to menu" or r != "2" or r != "Save list" or r != "Exit":
+        r = input('''What do you want to do?
 1 - Go to menu
 2 - Save list
 3 - Exit
 >>> ''')
-    if r == "1" or r == "Go to menu":
-        start()
-    elif r == "2" or r == "Save list":
-        savefile(format2)
-    elif r == "3" or r == "Exit":
-        exit(0)
-    else:
-        print("Answer is not right. Please try again")
-        restart(format2)
+        if r == "1" or r == "Go to menu":
+            start()
+            break
+        elif r == "2" or r == "Save list":
+            savefile(format2)
+            break
+        elif r == "3" or r == "Exit":
+            exit(0)
+        else:
+            print("Answer is not right. Please try again")
+            continue
 
 
 def savefile(format2):
     currindx2 = 0
     filename = input("How do you want to name your list? >>> ")
     file = open(f'{filename}.txt', 'w')
-    file.write('''    Here's your list. Enjoy    
-           :Example:           
-Name of item - Quantity of item\n''')
+    file.write('''---------------------------------
+|    Here's your list. Enjoy    |
+|           :Example:           |
+|Name of item - Quantity of item|
+---------------------------------\n''')
     for x in range(len(format2) // 2):
         file.write("{0} - {1}\n".format(format2[currindx2], format2[currindx2 + 1]))
         currindx2 += 2
@@ -112,15 +118,20 @@ Name of item - Quantity of item\n''')
 
 
 def restartsave():
-    rs = input('''What do you want to do?
+    rs = None
+    while rs != "1" or rs != "Go to menu" or rs != "2" or rs != "Exit":
+        rs = input('''What do you want to do?
 1 - Go to menu
 2 - Exit
 >>>  ''')
-    if rs == "2" or rs == "Exit":
-        exit(0)
-    else:
-        print("Answer is not right. Please try again")
-        restartsave()
+        if rs == "1" or rs == "Go to menu":
+            start()
+            break
+        elif rs == "2" or rs == "Exit":
+            exit(0)
+        else:
+            print("Error: Answer is not right. Please try again")
+            continue
 
 
 start()
