@@ -2,17 +2,20 @@ print('''ShopListCreator''')
 
 
 def start():
-    menu = None
     print('Hello, this program creates your shop list.')
-    while menu != "1" or menu != "Create new list" or menu != "2" or menu != "Exit":
+    while True:
         menu = input('''Menu:
 1 - Create new list
-2 - Exit
+2 - Read saved list
+3 - Exit
 >>> ''')
         if menu == "1" or menu == "Create new list":
             new_list()
             break
-        elif menu == "2" or menu == "Exit":
+        elif menu == "2" or menu == "Read saved list":
+            read_file()
+            break
+        elif menu == "3" or menu == "Exit":
             exit(0)
         else:
             print("Error: The answer isn't right")
@@ -118,8 +121,7 @@ def savefile(format2):
 
 
 def restartsave():
-    rs = None
-    while rs != "1" or rs != "Go to menu" or rs != "2" or rs != "Exit":
+    while True:
         rs = input('''What do you want to do?
 1 - Go to menu
 2 - Exit
@@ -132,6 +134,19 @@ def restartsave():
         else:
             print("Error: Answer is not right. Please try again")
             continue
+
+
+def read_file():
+    file_name = input('''If you remember the name of pre-saved list, please write it
+or write \"-\" if you don't remember the name >>> ''')
+    if file_name != "-":
+        file = open("{0}.txt".format(file_name), 'r')
+        print(file.read())
+        file.close()
+        restartsave()
+    elif file_name == "-":
+        print('''This version of the program ShopListCreator can't help you with this.''')
+        restartsave()
 
 
 start()
